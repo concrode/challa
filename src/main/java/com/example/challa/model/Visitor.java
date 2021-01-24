@@ -3,6 +3,8 @@ package com.example.challa.model;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 @Getter
@@ -11,21 +13,22 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 
-@Document(collation = "visitor")
+@Document(collection = "visitors")
 public class Visitor {
     @Id
-    private Long id;
+    private String id;
     private String firstName;
     private String lastName;
     private String phoneNumber;
     private String email;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Date checkInTime;
 
     public Visitor(String firstName, String lastName, String phoneNumber, String email, Date checkInTime) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
         this.email = email;
+        this.phoneNumber = phoneNumber;
         this.checkInTime = checkInTime;
     }
 

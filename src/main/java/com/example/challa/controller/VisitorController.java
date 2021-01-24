@@ -23,14 +23,19 @@ public class VisitorController {
 
     @GetMapping("/register")
     public String registerVisitor() {
-        return "register";
+        return "Registered";
     }
 
-    @GetMapping("/allInfo")
-    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/all")
     public List<Visitor> getAllVisitors() {
         return this.visitorService.getAllVisitors();
     }
+
+//    @GetMapping("/all")
+//    @PreAuthorize("hasRole('ADMIN')")
+//    public List<Visitor> getAllVisitors() {
+//        return this.visitorService.getAllVisitors();
+//    }
 
     @GetMapping("/report")
     @PreAuthorize("hasRole('ADMIN')")
