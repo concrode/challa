@@ -2,24 +2,17 @@ package com.example.challa.payload.response;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
-public class JwtResponse {
-    private String token;
-    private String type = "Bearer";
-    private String id;
-    private String username;
-    private List<String> roles;
+public class JwtResponse implements Serializable {
+    private final String jwt;
 
-    public JwtResponse(String accessToken, String id, String username, List<String> roles) {
-        this.token = accessToken;
-        this.id = id;
-        this.username = username;
-        this.roles = roles;
+    public JwtResponse(String jwt) {
+        this.jwt = jwt;
+    }
+
+    public String getJwt() {
+        return jwt;
     }
 }
