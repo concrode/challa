@@ -11,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 
-@Document(collation = "Visitor")
+@Document(collation = "visitor")
 public class Visitor {
     @Id
     private Long id;
