@@ -1,18 +1,24 @@
 package com.example.challa.controller;
 
 import com.example.challa.model.Visitor;
+import com.example.challa.payload.request.RegisterRequest;
+import com.example.challa.payload.response.RegisterResponse;
+import com.example.challa.repository.VisitorRepository;
 import com.example.challa.service.VisitorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/visitor")
+@RequestMapping("/visitor")
 public class VisitorController {
+
+    @Autowired
+    private VisitorRepository visitorRepository;
 
     private final VisitorService visitorService;
 
@@ -21,15 +27,20 @@ public class VisitorController {
         this.visitorService = visitorService;
     }
 
-    @GetMapping("/register")
-    public String registerVisitor() {
-        return "Registered";
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@RequestBody RegisterRequest registerRequest) {
+        Visitor visitor = new Visitor(registerRequest.getFirstName(), registerRequest.getLastName(),
+                registerRequest.getPhoneNumber(), registerRequest.getEmail(), registerRequest.getCheckinTime());
+
+        visitorRepository.save(visitor);
+        return ResponseEntity.ok(new RegisterResponse("success"));
     }
 
     @GetMapping("/all")
     public List<Visitor> getAllVisitors() {
         return this.visitorService.getAllVisitors();
     }
+
 
 //    @GetMapping("/all")
 //    @PreAuthorize("hasRole('ADMIN')")

@@ -27,8 +27,8 @@ public class Visitor {
     public Visitor(String firstName, String lastName, String phoneNumber, String email, Date checkInTime) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
         this.phoneNumber = phoneNumber;
+        this.email = email;
         this.checkinTime = checkInTime;
     }
 
