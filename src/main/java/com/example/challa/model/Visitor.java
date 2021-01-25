@@ -21,15 +21,15 @@ public class Visitor {
     private String lastName;
     private String phoneNumber;
     private String email;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private Date checkInTime;
+    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE_TIME)
+    private Date checkinTime;
 
     public Visitor(String firstName, String lastName, String phoneNumber, String email, Date checkInTime) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.checkInTime = checkInTime;
+        this.checkinTime = checkInTime;
     }
 
 
