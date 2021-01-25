@@ -37,6 +37,7 @@ public class VisitorController {
     }
 
     @GetMapping("/all")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Visitor> getAllVisitors() {
         return this.visitorService.getAllVisitors();
     }
