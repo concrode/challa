@@ -19,11 +19,4 @@ public class VisitorService {
     public List<Visitor> getAllVisitors() {
         return visitorRepository.findAll();
     }
-
-//    public List<Visitor> getAllVisitors() {
-//        List l = new ArrayList();
-//        Visitor v = new Visitor("a","b","03","sds@", new Date());
-//        l.add(v);
-//        return l;
-//    }
 }

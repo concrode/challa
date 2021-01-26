@@ -12,7 +12,7 @@ public class ChallaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ChallaApplication.class, args);
-
+//		//Get encoded password
 //		String encoded = new BCryptPasswordEncoder().encode("87654321");
 //		System.out.println("=======> Encoded password:" + encoded);
 	}
