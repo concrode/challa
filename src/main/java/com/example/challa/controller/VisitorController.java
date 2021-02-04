@@ -4,13 +4,19 @@ import com.example.challa.model.Visitor;
 import com.example.challa.payload.request.RegisterRequest;
 import com.example.challa.payload.response.RegisterResponse;
 import com.example.challa.repository.VisitorRepository;
+import com.example.challa.service.ReportService;
 import com.example.challa.service.VisitorService;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -20,12 +26,11 @@ public class VisitorController {
     @Autowired
     private VisitorRepository visitorRepository;
 
-    private final VisitorService visitorService;
+    @Autowired
+    private  VisitorService visitorService;
 
     @Autowired
-    public VisitorController(VisitorService visitorService) {
-        this.visitorService = visitorService;
-    }
+    private  ReportService reportService;
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody RegisterRequest registerRequest) {
@@ -43,15 +48,9 @@ public class VisitorController {
     }
 
 
-//    @GetMapping("/all")
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public List<Visitor> getAllVisitors() {
-//        return this.visitorService.getAllVisitors();
-//    }
-
-    @GetMapping("/report")
+    @GetMapping("/report/{reportFormat}")
     @PreAuthorize("hasRole('ADMIN')")
-    public String getVisitorReport() {
-        return "Report Content.";
+    public Map getVisitorReport(@PathVariable String reportFormat) throws FileNotFoundException, JRException {
+          return Collections.singletonMap("response", this.reportService.exportReport(reportFormat));
     }
 }
